@@ -1,8 +1,56 @@
 <html>
 <head>
 	<title></title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
 	<style type="text/css">
+		img {
+			width: 50px;
+			border-radius: 50%;
+		}
+		.format-num{
+			float: left;
+			margin-right: 10px;
+			position:relative;
+			top:3px; 
+			margin-left:5px;
+		}
+
+		.wraps{
+			width:100%;
+		}
+
+		.blocks-1 {
+		    display: inline-block;
+		    width: 100px;
+		}
+
+		.blocks-2 {
+		    display: inline-block;
+		    width: 175px;
+		}
+
+		.blocks-3 {
+		    display: inline-block;
+		    width: 300px;
+		}
+
+		.blocks-4 {
+		    display: inline-block;
+		    width: 400px;
+		}
+
+		.coolwords0{
+			font-size: 100px;
+			font-family: 'Roboto Slab', serif;
+		}
+
+		.coolwords1{
+			font-family: 'Roboto Slab', serif;
+		}
+
 		.numbers {
+			font-family: 'Roboto Slab', serif;
 			position:relative;
 			text-align: center;
 			bottom: 30px;
@@ -61,19 +109,43 @@
 	</style>
 </head>
 <body>
-	<div style="float:left;">
-		<div> <div style='float:left; margin-right:10px;'>flags:</div><div id='flags' style='float:left;'></div></div>
+	<div class="wraps">
+
+	<div class='blocks-3'>
+		<div style='float:left; margin-right: 10px;' class="coolwords0">Minesweeper</div>
+		<div class='coolwords1' style='float:left; margin-right:15px; position:relative;top:10px;'>by</div>
+		<a style='float:left; margin-right:10px;' href="http://michaelzakanyresume.me/">
+			<img src="./assets/img/me.jpg">
+		</a>
+	</div>
 	</div>
 
-	<div style="float:left; margin-left: 20px;">
-		<div id='bombCount' style='float: left; margin-right: 10px;'></div>
-		<div style='float: left;'>Current Cell: </div><div style='float: left; margin-left: 10px;' id='current'></div>
+	<div class="wraps">
+
+	<div class='blocks-1'>
+		<div style='float:left;' class="coolwords1">flags:</div> 
+		<div class='format-num' id='flags'></div>
+	</div>
+
+	<div class='blocks-2'>
+		<div class='coolwords1' style='float:left;'>Bomb Count: </div> 
+		<div class='format-num' id='bombCount'></div>
+	</div>
+
+	<div class="blocks-4">
+		<div class='coolwords1' style='float:left;'>Current Cell: </div>
+		<div style='float:left; margin-left: 10px;' class='coolwords1' id='current'></div>
 	</div>
 	
-	<div id='bombSubmitForm' class='hide'>
-		Submit mines:
-		<button id='checkBombs'>Check!</button>
+	<div class="blocks-1">
+		<div id='bombSubmitForm' class='hide'>
+			Submit mines:
+			<button id='checkBombs'>Check!</button>
+		</div>
 	</div>
+
+	</div>
+
 	<br>
 	<hr>
 	<div id="container"></div>
