@@ -1,0 +1,83 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.numbers {
+			position:relative;
+			text-align: center;
+			bottom: 30px;
+		}
+		.goldfish {
+			color: black;
+		}
+
+		.bass {
+			font-weight: 500;
+			color: red;
+		}
+		.marlin {
+			font-weight: 500;
+			color: orange;
+		}
+		
+		.tom-seleck {
+			font-weight: 500;
+			color: purple;
+		}
+		
+		.hide{
+			visibility: hidden;
+		}
+
+		.mark{
+			background-color: #92A8F1;
+		}		
+
+		.glow{
+			background-color: #89F689;
+		}
+
+		div.hovering:hover { 
+		    background-color: yellow;
+		}
+
+		.bomb{
+			background-color: red;
+		}
+
+		.cell{
+			border: 1px solid black;
+			float: left;
+			width: 50px;
+			height: 50px;
+		}
+
+		#container{
+			margin-left: auto ;
+  		margin-right: auto ;
+			margin-top: 20px;
+			width: 550px;
+		}
+	</style>
+</head>
+<body>
+	<div style="float:left;">
+		<div> <div style='float:left; margin-right:10px;'>flags:</div><div id='flags' style='float:left;'>0</div></div>
+	</div>
+
+	<div style="float:left; margin-left: 20px;">
+		<div id='bombCount' style='float: left; margin-right: 10px;'></div>
+		<div style='float: left;'>Current Cell: </div><div style='float: left; margin-left: 10px;' id='current'></div>
+	</div>
+	<br>
+	<hr>
+	<div id="container"></div>
+</body>
+
+<script type="text/javascript" src='./lib/game.js'></script>
+<script type="text/javascript" src='./lib/cell.js'></script>
+<script type="text/javascript" src='./lib/dom.js'></script>
+<script type="text/javascript" src='./lib/main.js'></script>
+
+</script>
+</html>
