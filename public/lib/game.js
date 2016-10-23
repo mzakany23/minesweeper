@@ -3,11 +3,12 @@ var Game = function(size=10,bombs=20){
 	Game.prototype.size = size
 	Game.prototype.bombs = bombs
 	Game.prototype.visitedLookup = {}
-	Game.prototype.flags = 0
+	Game.prototype.flags = bombs
 }
 
 Game.prototype.play = function(){
 	Game.prototype.grid = Game.prototype.makeGrid(this.size,this.bombs)
+	document.getElementById('flags').innerHTML = this.bombs
 	Game.prototype.placeBombs()
 	Game.prototype.initGrid(this.size)
 }
@@ -194,19 +195,32 @@ Game.prototype.calculateClick = function(e) {
 	Game.prototype.grid[x][y].visited = true
 }
 
-Game.prototype.rightClick = function(e){
-	e.preventDefault()
-	if (!e.target.childNodes[0].innerHTML){return}
+Game.prototype.getCell = function(e){
 	var t = (e.target.childNodes[0].innerHTML).split(',')
 	var x = parseInt(t[0]),y=parseInt(t[1])
 	var y = parseInt(t[1])
-	var cell = Game.prototype.grid[x][y]
-	cell.mark()
-	if (cell.marked) {
-		Game.prototype.flags += 1	
-	} else {
-		Game.prototype.flags -= 1
+	return Game.prototype.grid[x][y]
+}
+
+Game.prototype.rightClick = function(e){
+	var f = Game.prototype.flags
+	e.preventDefault()
+	if (!e.target.childNodes[0].innerHTML){return}
+	
+	var cell = Game.prototype.getCell(e)
+
+	if (f > 0 && !cell.marked){
+		cell.mark()
+	 	if (cell.marked) {
+			Game.prototype.flags -= 1	
+		} else {
+			Game.prototype.flags += 1
+		}
+	} else if (cell.marked){
+		cell.mark()
+		Game.prototype.flags += 1
 	}
+
 	
 	document.getElementById('flags').innerHTML = Game.prototype.flags
 }
