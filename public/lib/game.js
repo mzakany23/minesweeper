@@ -155,6 +155,10 @@ Game.prototype.blaze = function(type){
 	}
 }
 
+Game.prototype.checkBombs = function() {
+	console.log('fuck you')
+}
+
 Game.prototype.calculateClick = function(e) {
 	if (!e.target.childNodes[0].innerHTML) {
 		return
@@ -208,6 +212,12 @@ Game.prototype.rightClick = function(e){
 	if (!e.target.childNodes[0].innerHTML){return}
 	
 	var cell = Game.prototype.getCell(e)
+	
+	if (f ===1){
+		document.getElementById('bombSubmitForm').classList.remove('hide')
+	} else {
+		document.getElementById('bombSubmitForm').classList.add('hide')
+	}
 
 	if (f > 0 && !cell.marked){
 		cell.mark()
@@ -220,6 +230,7 @@ Game.prototype.rightClick = function(e){
 		cell.mark()
 		Game.prototype.flags += 1
 	}
+
 
 	
 	document.getElementById('flags').innerHTML = Game.prototype.flags

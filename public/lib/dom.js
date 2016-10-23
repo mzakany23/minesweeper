@@ -28,3 +28,7 @@ function paintBombCount(cells){
 		}
 	}
 }
+
+document.getElementById('checkBombs').addEventListener('click',function(e){
+	Game.prototype.checkBombs()
+})
