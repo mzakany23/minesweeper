@@ -2,151 +2,48 @@
 <head>
 	<title></title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-
-	<style type="text/css">
-		img {
-			width: 50px;
-			border-radius: 50%;
-		}
-		.format-num{
-			float: left;
-			margin-right: 10px;
-			position:relative;
-			top:3px; 
-			margin-left:5px;
-		}
-
-		.wraps{
-			width:100%;
-		}
-
-		.blocks-1 {
-		    display: inline-block;
-		    width: 100px;
-		}
-
-		.blocks-2 {
-		    display: inline-block;
-		    width: 175px;
-		}
-
-		.blocks-3 {
-		    display: inline-block;
-		    width: 300px;
-		}
-
-		.blocks-4 {
-		    display: inline-block;
-		    width: 400px;
-		}
-
-		.coolwords0{
-			font-size: 100px;
-			font-family: 'Roboto Slab', serif;
-		}
-
-		.coolwords1{
-			font-family: 'Roboto Slab', serif;
-		}
-
-		.numbers {
-			font-family: 'Roboto Slab', serif;
-			position:relative;
-			text-align: center;
-			bottom: 30px;
-		}
-		.goldfish {
-			color: black;
-		}
-
-		.bass {
-			font-weight: 500;
-			color: red;
-		}
-		.marlin {
-			font-weight: 500;
-			color: orange;
-		}
-		
-		.tom-seleck {
-			font-weight: 500;
-			color: purple;
-		}
-		
-		.hide{
-			visibility: hidden;
-		}
-
-		.mark{
-			background-color: #92A8F1;
-		}		
-
-		.glow{
-			background-color: #89F689;
-		}
-
-		div.hovering:hover { 
-		    background-color: yellow;
-		}
-
-		.bomb{
-			background-color: red;
-		}
-
-		.cell{
-			border: 1px solid black;
-			float: left;
-			width: 50px;
-			height: 50px;
-		}
-
-		#container{
-			margin-left: auto ;
-  		margin-right: auto ;
-			margin-top: 20px;
-			width: 550px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
 </head>
 <body>
+	<!-- header -->
 	<div class="wraps">
-
-	<div class='blocks-3'>
-		<div style='float:left; margin-right: 10px;' class="coolwords0">Minesweeper</div>
-		<div class='coolwords1' style='float:left; margin-right:15px; position:relative;top:10px;'>by</div>
-		<a style='float:left; margin-right:10px;' href="http://michaelzakanyresume.me/">
-			<img src="./assets/img/me.jpg">
-		</a>
-	</div>
-	</div>
-
-	<div class="wraps">
-
-	<div class='blocks-1'>
-		<div style='float:left;' class="coolwords1">flags:</div> 
-		<div class='format-num' id='flags'></div>
-	</div>
-
-	<div class='blocks-2'>
-		<div class='coolwords1' style='float:left;'>Bomb Count: </div> 
-		<div class='format-num' id='bombCount'></div>
-	</div>
-
-	<div class="blocks-4">
-		<div class='coolwords1' style='float:left;'>Current Cell: </div>
-		<div style='float:left; margin-left: 10px;' class='coolwords1' id='current'></div>
-	</div>
-	
-	<div class="blocks-1">
-		<div id='bombSubmitForm' class='hide'>
-			Submit mines:
-			<button id='checkBombs'>Check!</button>
+		<div class='blocks-3'>
+			<div style='float:left; margin-right: 10px;' class="coolwords0">Minesweeper</div>
+			<div class='coolwords1' style='float:left; margin-right:15px; position:relative;top:10px;'>by</div>
+			<a style='float:left; margin-right:10px;' href="http://michaelzakanyresume.me/">
+				<img src="./assets/img/me.jpg">
+			</a>
+			<a style='position:relative; top:12px;left:5px;' href="https://github.com/mzakany23/minesweeper">
+				<img src="./assets/img/gh.png">
+			</a>
 		</div>
 	</div>
 
+	<!-- main -->
+	<div class="wraps">
+		<div class='blocks-1'>
+			<div style='float:left;' class="coolwords1">flags:</div> 
+			<div class='format-num' id='flags'></div>
+		</div>
+
+		<div class='blocks-2'>
+			<div class='coolwords1' style='float:left;'>Bomb Count: </div> 
+			<div class='format-num' id='bombCount'></div>
+		</div>
+
+		<div class="blocks-4">
+			<div class='coolwords1' style='float:left;'>Current Cell: </div>
+			<div style='float:left; margin-left: 10px;' class='coolwords1' id='current'></div>
+		</div>
+		
+		<div class="blocks-1">
+			<div id='bombSubmitForm' class='hide'>
+				Submit mines:
+				<button id='checkBombs'>Check!</button>
+			</div>
+		</div>
 	</div>
 
-	<br>
 	<hr>
 	<div id="container"></div>
 </body>
