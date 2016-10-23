@@ -25,7 +25,7 @@ Game.prototype.reset = function() {
 	}
 	this.bombs = this.bombsPlaced
 	this.bombsPlaced = 0
-	this.flags = 0
+	this.flags = this.bombs
 	document.getElementById('flags').innerHTML = 0
 	Game.prototype.play()
 }
@@ -223,6 +223,7 @@ Game.prototype.uncoverBomb = function(cell) {
 
 Game.prototype.rightClick = function(e){
 	var f = Game.prototype.flags
+
 	e.preventDefault()
 	if (!e.target.childNodes[0].innerHTML){return}
 	

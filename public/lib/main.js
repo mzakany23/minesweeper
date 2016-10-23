@@ -1,2 +1,2 @@
-var game = new Game(10,1) 
+var game = new Game(10,20) 
 game.play()
