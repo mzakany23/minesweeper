@@ -4,6 +4,7 @@ var Game = function(size=10,bombs=20){
 	Game.prototype.bombs = bombs
 	Game.prototype.visitedLookup = {}
 	Game.prototype.flags = bombs
+	Game.prototype.bombsCovered = {}
 }
 
 Game.prototype.play = function(){
@@ -156,7 +157,13 @@ Game.prototype.blaze = function(type){
 }
 
 Game.prototype.checkBombs = function() {
-	console.log('fuck you')
+	var c = 0
+	for (var key in Game.prototype.bombsCovered){
+		var bomb = Game.prototype.bombsCovered[key]
+		if (bomb === true){c += 1}
+	}
+	alert(`You uncovered ${c} bombs, good job.`)
+	Game.prototype.reset()
 }
 
 Game.prototype.calculateClick = function(e) {
@@ -206,6 +213,14 @@ Game.prototype.getCell = function(e){
 	return Game.prototype.grid[x][y]
 }
 
+Game.prototype.coverBomb = function(cell) {
+	Game.prototype.bombsCovered[`${cell.x},${cell.y}`] = true
+}
+
+Game.prototype.uncoverBomb = function(cell) {
+	Game.prototype.bombsCovered[`${cell.x},${cell.y}`] = false
+}
+
 Game.prototype.rightClick = function(e){
 	var f = Game.prototype.flags
 	e.preventDefault()
@@ -221,6 +236,8 @@ Game.prototype.rightClick = function(e){
 
 	if (f > 0 && !cell.marked){
 		cell.mark()
+		Game.prototype.coverBomb(cell)
+
 	 	if (cell.marked) {
 			Game.prototype.flags -= 1	
 		} else {
@@ -229,9 +246,8 @@ Game.prototype.rightClick = function(e){
 	} else if (cell.marked){
 		cell.mark()
 		Game.prototype.flags += 1
+		Game.prototype.uncoverBomb(cell)
 	}
 
-
-	
 	document.getElementById('flags').innerHTML = Game.prototype.flags
 }
