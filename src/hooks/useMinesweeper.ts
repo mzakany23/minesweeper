@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import type { CellData, GameState } from '../types';
 
 const DIRECTIONS = [
@@ -107,8 +107,31 @@ export function useMinesweeper(initialSize = 10, initialMines = 20) {
   }));
 
   const [isFirstClick, setIsFirstClick] = useState(true);
+  const [timer, setTimer] = useState(0);
+  const timerRef = useRef<number | null>(null);
+
+  // Timer effect
+  useEffect(() => {
+    if (!isFirstClick && gameState.gameStatus === 'playing') {
+      timerRef.current = window.setInterval(() => {
+        setTimer((t) => Math.min(t + 1, 999));
+      }, 1000);
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [isFirstClick, gameState.gameStatus]);
 
   const resetGame = useCallback((size = initialSize, mines = initialMines) => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    setTimer(0);
     setGameState({
       grid: createEmptyGrid(size),
       gameStatus: 'playing',
@@ -177,6 +200,7 @@ export function useMinesweeper(initialSize = 10, initialMines = 20) {
 
   return {
     gameState,
+    timer,
     handleCellClick,
     handleCellRightClick,
     resetGame,

@@ -3,15 +3,23 @@ import { useMinesweeper } from './hooks/useMinesweeper';
 import { Board } from './components/Board';
 import './App.css';
 
-const GAME_SIZE = 10;
-const MINE_COUNT = 20;
+type Difficulty = 'easy' | 'medium' | 'hard';
+
+const DIFFICULTIES: Record<Difficulty, { size: number; mines: number; label: string }> = {
+  easy: { size: 8, mines: 10, label: 'Easy' },
+  medium: { size: 10, mines: 20, label: 'Medium' },
+  hard: { size: 16, mines: 40, label: 'Hard' },
+};
 
 function App() {
-  const { gameState, handleCellClick, handleCellRightClick, resetGame } = useMinesweeper(
-    GAME_SIZE,
-    MINE_COUNT
-  );
+  const [difficulty, setDifficulty] = useState<Difficulty>('medium');
   const [showRules, setShowRules] = useState(false);
+
+  const { size, mines } = DIFFICULTIES[difficulty];
+  const { gameState, timer, handleCellClick, handleCellRightClick, resetGame } = useMinesweeper(
+    size,
+    mines
+  );
 
   const gameOver = gameState.gameStatus !== 'playing';
 
@@ -26,6 +34,12 @@ function App() {
     }
   };
 
+  const handleDifficultyChange = (newDifficulty: Difficulty) => {
+    setDifficulty(newDifficulty);
+    const { size: newSize, mines: newMines } = DIFFICULTIES[newDifficulty];
+    resetGame(newSize, newMines);
+  };
+
   return (
     <div className="app">
       <header className="header">
@@ -33,13 +47,25 @@ function App() {
         <h1>Minesweeper</h1>
       </header>
 
+      <div className="difficulty-selector">
+        {(Object.keys(DIFFICULTIES) as Difficulty[]).map((diff) => (
+          <button
+            key={diff}
+            className={`difficulty-btn ${difficulty === diff ? 'active' : ''}`}
+            onClick={() => handleDifficultyChange(diff)}
+          >
+            {DIFFICULTIES[diff].label}
+          </button>
+        ))}
+      </div>
+
       <div className="game-container">
         <div className="status-bar">
           <div className="counter">{String(gameState.flagsRemaining).padStart(3, '0')}</div>
-          <button className="reset-button" onClick={() => resetGame()}>
+          <button className="reset-button" onClick={() => resetGame(size, mines)}>
             {getStatusEmoji()}
           </button>
-          <div className="counter">{String(gameState.minesCount).padStart(3, '0')}</div>
+          <div className="counter">{String(timer).padStart(3, '0')}</div>
         </div>
 
         <Board
@@ -51,7 +77,9 @@ function App() {
 
         {gameOver && (
           <div className="game-over-message">
-            {gameState.gameStatus === 'won' ? 'You Win!' : 'Game Over!'}
+            {gameState.gameStatus === 'won'
+              ? `You Win! Time: ${timer}s`
+              : 'Game Over!'}
           </div>
         )}
       </div>
@@ -69,8 +97,14 @@ function App() {
             <li><strong>Right-click</strong> (or long-press on mobile) to flag a suspected mine</li>
             <li><strong>Numbers</strong> show how many mines are adjacent to that cell</li>
             <li><strong>Empty cells</strong> automatically reveal their neighbors</li>
-            <li>The left counter shows remaining flags, the right shows total mines</li>
+            <li>The left counter shows remaining flags, the right shows time</li>
             <li>Click the face to restart the game</li>
+          </ul>
+          <h3>Difficulty Levels</h3>
+          <ul>
+            <li><strong>Easy:</strong> 8×8 grid, 10 mines</li>
+            <li><strong>Medium:</strong> 10×10 grid, 20 mines</li>
+            <li><strong>Hard:</strong> 16×16 grid, 40 mines</li>
           </ul>
         </div>
       )}
