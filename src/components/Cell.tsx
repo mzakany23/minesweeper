@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useRef, useCallback } from 'react';
 import type { CellData } from '../types';
 import './Cell.css';
 
@@ -20,11 +20,40 @@ const NUMBER_COLORS: Record<number, string> = {
   8: 'gray',
 };
 
+const LONG_PRESS_DURATION = 500;
+
 export const Cell = memo(function Cell({ cell, gameOver, onClick, onRightClick }: CellProps) {
+  const longPressTimer = useRef<number | null>(null);
+  const isLongPress = useRef(false);
+
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     onRightClick();
   };
+
+  const handleTouchStart = useCallback(() => {
+    isLongPress.current = false;
+    longPressTimer.current = window.setTimeout(() => {
+      isLongPress.current = true;
+      onRightClick();
+    }, LONG_PRESS_DURATION);
+  }, [onRightClick]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  }, []);
+
+  const handleClick = useCallback(() => {
+    // Don't trigger click if it was a long press
+    if (isLongPress.current) {
+      isLongPress.current = false;
+      return;
+    }
+    onClick();
+  }, [onClick]);
 
   const getCellContent = () => {
     if (cell.isFlagged) return '🚩';
@@ -57,8 +86,11 @@ export const Cell = memo(function Cell({ cell, gameOver, onClick, onRightClick }
   return (
     <button
       className={getCellClass()}
-      onClick={onClick}
+      onClick={handleClick}
       onContextMenu={handleContextMenu}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchEnd}
       disabled={gameOver && !cell.isRevealed}
       style={numberColor ? { color: numberColor } : undefined}
     >
