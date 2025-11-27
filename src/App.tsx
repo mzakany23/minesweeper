@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useMinesweeper } from './hooks/useMinesweeper';
 import { Board } from './components/Board';
 import './App.css';
@@ -10,6 +11,7 @@ function App() {
     GAME_SIZE,
     MINE_COUNT
   );
+  const [showRules, setShowRules] = useState(false);
 
   const gameOver = gameState.gameStatus !== 'playing';
 
@@ -26,7 +28,10 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Minesweeper</h1>
+      <header className="header">
+        <img src="/me.jpg" alt="Author" className="author-logo" />
+        <h1>Minesweeper</h1>
+      </header>
 
       <div className="game-container">
         <div className="status-bar">
@@ -51,9 +56,24 @@ function App() {
         )}
       </div>
 
-      <p className="instructions">
-        Left-click to reveal | Right-click to flag
-      </p>
+      <button className="rules-toggle" onClick={() => setShowRules(!showRules)}>
+        {showRules ? 'Hide Rules' : 'Show Rules'}
+      </button>
+
+      {showRules && (
+        <div className="rules-section">
+          <h2>How to Play</h2>
+          <ul>
+            <li><strong>Goal:</strong> Reveal all cells that don't contain mines</li>
+            <li><strong>Click</strong> (or tap) a cell to reveal it</li>
+            <li><strong>Right-click</strong> (or long-press on mobile) to flag a suspected mine</li>
+            <li><strong>Numbers</strong> show how many mines are adjacent to that cell</li>
+            <li><strong>Empty cells</strong> automatically reveal their neighbors</li>
+            <li>The left counter shows remaining flags, the right shows total mines</li>
+            <li>Click the face to restart the game</li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

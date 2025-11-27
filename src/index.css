@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --cell-size: 32px;
+  --cell-font-size: 14px;
+}
+
 body {
   margin: 0;
   background-color: #e0e0e0;
@@ -11,4 +16,19 @@ body {
 #root {
   display: flex;
   justify-content: center;
+}
+
+/* Mobile responsive cell sizes */
+@media (max-width: 400px) {
+  :root {
+    --cell-size: 28px;
+    --cell-font-size: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  :root {
+    --cell-size: 24px;
+    --cell-font-size: 11px;
+  }
 }

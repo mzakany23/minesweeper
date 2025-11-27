@@ -1,8 +1,8 @@
 .cell {
-  width: 32px;
-  height: 32px;
+  width: var(--cell-size, 32px);
+  height: var(--cell-size, 32px);
   border: none;
-  font-size: 14px;
+  font-size: var(--cell-font-size, 14px);
   font-weight: bold;
   cursor: pointer;
   display: flex;
@@ -10,6 +10,8 @@
   justify-content: center;
   transition: background-color 0.1s;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .cell.hidden {

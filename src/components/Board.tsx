@@ -11,7 +11,7 @@ interface BoardProps {
 
 export function Board({ grid, gameOver, onCellClick, onCellRightClick }: BoardProps) {
   return (
-    <div className="board" style={{ gridTemplateColumns: `repeat(${grid.length}, 32px)` }}>
+    <div className="board" style={{ gridTemplateColumns: `repeat(${grid.length}, var(--cell-size, 32px))` }}>
       {grid.map((row, x) =>
         row.map((cell, y) => (
           <Cell
