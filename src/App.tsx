@@ -59,7 +59,7 @@ function App() {
         ))}
       </div>
 
-      <div className="game-container">
+      <div className={`game-container difficulty-${difficulty}`}>
         <div className="status-bar">
           <div className="counter">{String(gameState.flagsRemaining).padStart(3, '0')}</div>
           <button className="reset-button" onClick={() => resetGame(size, mines)}>
