@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title></title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
+</head>
+<body>
+	<!-- header -->
+	<div class="wraps">
+		<div class='blocks-3'>
+			<div style='float:left; margin-right: 10px;' class="coolwords0">Minesweeper</div>
+			<div class='coolwords1' style='float:left; margin-right:15px; position:relative;top:10px;'>by</div>
+			<a style='float:left; margin-right:10px;' href="http://michaelzakanyresume.me/">
+				<img src="./assets/img/me.jpg">
+			</a>
+			<a style='position:relative; top:12px;left:5px;' href="https://github.com/mzakany23/minesweeper">
+				<img src="./assets/img/gh.png">
+			</a>
+		</div>
+	</div>
+
+	<!-- main -->
+	<div class="wraps">
+		<div class='blocks-1'>
+			<div style='float:left;' class="coolwords1">flags:</div> 
+			<div class='format-num' id='flags'></div>
+		</div>
+
+		<div class='blocks-2'>
+			<div class='coolwords1' style='float:left;'>Bomb Count: </div> 
+			<div class='format-num' id='bombCount'></div>
+		</div>
+
+		<div class="blocks-4">
+			<div class='coolwords1' style='float:left;'>Current Cell: </div>
+			<div style='float:left; margin-left: 10px;' class='coolwords1' id='current'></div>
+		</div>
+		
+		<div class="blocks-1">
+			<div id='bombSubmitForm' class='hide'>
+				Submit mines:
+				<button id='checkBombs'>Check!</button>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+	<div id="container"></div>
+</body>
+
+<script type="text/javascript" src='./lib/game.js'></script>
+<script type="text/javascript" src='./lib/cell.js'></script>
+<script type="text/javascript" src='./lib/dom.js'></script>
+<script type="text/javascript" src='./lib/main.js'></script>
+
+</script>
+</html>
