@@ -21,8 +21,8 @@ def extract_video_id(url_or_id: str) -> str:
 
 def get_transcript(video_url: str) -> str:
     video_id = extract_video_id(video_url)
-    transcript = YouTubeTranscriptApi.get_transcript(video_id)
-    return "\n".join(entry["text"] for entry in transcript)
+    transcript = YouTubeTranscriptApi().fetch(video_id)
+    return "\n".join(snippet.text for snippet in transcript)
 
 
 if __name__ == "__main__":
